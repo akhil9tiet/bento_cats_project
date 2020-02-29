@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 var data = [
 	{ id: 1, text: 'A', favorite: false },
@@ -18,8 +18,16 @@ var data = [
 	{ id: 15, text: 'O', favorite: true },
 ];
 const App = () => {
-  const [hash, setHash] = useState(data);
-	console.log(data);
+	const [hash, setHash] = useState(data);
+
+	var homeData = [],
+		favData = [];
+	useEffect(() => {
+		homeData = hash.filter((d) => !d.favorite);
+		favData = hash.filter((d) => d.favorite);
+		setHash([...favData, ...homeData]);
+	}, []);
+	console.log(hash);
 	return (
 		<div className='App'>
 			<h1>Test</h1>
