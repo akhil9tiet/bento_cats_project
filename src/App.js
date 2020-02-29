@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 var data = [
 	{ id: 1, text: 'A', favorite: false },
@@ -18,6 +18,7 @@ var data = [
 	{ id: 15, text: 'O', favorite: true },
 ];
 const App = () => {
+  const [hash, setHash] = useState(data);
 	console.log(data);
 	return (
 		<div className='App'>
