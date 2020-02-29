@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -65,34 +65,23 @@ const data = [
 const App = () => {
 	const [hash, setHash] = useState(data);
 
-	// var homeData = [],
-	//   favData = [];
-
-	// useEffect(() => {
-	// 	homeData = hash.filter((d) => !d.favorite);
-	// 	favData = hash.filter((d) => d.favorite);
-	// 	setHash([...favData, ...homeData]);
-	// }, []);
-
 	return (
 		<React.Fragment>
 			<h1>Bento Cats Project</h1>
-      
+
 			<Grid container style={{ paddingLeft: 60, paddingTop: 40, paddingRight: 60 }} spacing={2}>
 				{hash.map((card, i) => {
 					return (
 						<Grid item xs={12} sm={6} md={4} lg={3} key={card.id}>
-							<Card >
-								<CardContent >
+							<Card>
+								<CardContent>
 									<CardMedia style={{ height: 450 }} image={card.url} title={card.id} />
 									<Typography variant='body2' component='p'>
 										{card.fact}
 									</Typography>
 									<IconButton
-										
 										onClick={() => {
 											const restD = hash.filter((el) => el.id !== card.id);
-											console.log('restD', restD);
 											card.favorite
 												? setHash([
 														...restD,
@@ -114,7 +103,7 @@ const App = () => {
 												  ]);
 										}}
 										aria-label='add to favorites'>
-										<FavoriteIcon  color={card.favorite ? 'secondary' : 'primary'} />
+										<FavoriteIcon color={card.favorite ? 'secondary' : 'inherit'} />
 									</IconButton>
 								</CardContent>
 							</Card>
