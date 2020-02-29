@@ -1,4 +1,13 @@
 import React, { useState, useEffect } from 'react';
+
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+
 import './App.css';
 var data = [
 	{
@@ -51,7 +60,7 @@ var data = [
 		fact:
 			'The lightest cat on record is a blue point Himalayan called Tinker Toy, who weighed 1 pound, 6 ounces (616 g). Tinker Toy was 2.75 inches (7 cm) tall and 7.5 inches (19 cm) long.',
 		favorite: false,
-	}
+	},
 ];
 const App = () => {
 	const [hash, setHash] = useState(data);
@@ -65,9 +74,28 @@ const App = () => {
 	}, []);
 	console.log(hash);
 	return (
-		<div className='App'>
-			<h1>Test</h1>
-		</div>
+		<React.Fragment>
+			<h1>Bento Cats Project</h1>
+			<Grid container style={{ paddingLeft: 60, paddingTop: 40, paddingRight: 60 }} spacing={2}>
+				{hash.map((card, i) => {
+					return (
+						<Grid item xs={12} sm={6} md={4} lg={3} key={card.id}>
+							<Card key={card.id}>
+								<CardContent key={card.id}>
+									<CardMedia key={card.id} style={{ height: 450 }} image={card.url} title={card.id} />
+									<Typography key={card.id} variant='body2' component='p'>
+										{card.fact}
+									</Typography>
+									<IconButton aria-label='add to favorites'>
+										<FavoriteIcon key={card.id} color={card.favorite ? 'secondary' : 'default'} />
+									</IconButton>
+								</CardContent>
+							</Card>
+						</Grid>
+					);
+				})}
+			</Grid>
+		</React.Fragment>
 	);
 };
 
