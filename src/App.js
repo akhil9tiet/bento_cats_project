@@ -1,12 +1,29 @@
 import React from 'react';
 import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <h1>Test</h1>
-    </div>
-  );
-}
+var data = [
+	{ id: 1, text: 'A', favorite: false },
+	{ id: 2, text: 'B', favorite: false },
+	{ id: 3, text: 'C', favorite: false },
+	{ id: 4, text: 'D', favorite: false },
+	{ id: 5, text: 'E', favorite: false },
+	{ id: 6, text: 'F', favorite: false },
+	{ id: 7, text: 'G', favorite: false },
+	{ id: 8, text: 'H', favorite: false },
+	{ id: 9, text: 'I', favorite: false },
+	{ id: 10, text: 'J', favorite: false },
+	{ id: 11, text: 'K', favorite: false },
+	{ id: 12, text: 'L', favorite: false },
+	{ id: 13, text: 'M', favorite: true },
+	{ id: 14, text: 'N', favorite: true },
+	{ id: 15, text: 'O', favorite: true },
+];
+const App = () => {
+	console.log(data);
+	return (
+		<div className='App'>
+			<h1>Test</h1>
+		</div>
+	);
+};
 
 export default App;
