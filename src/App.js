@@ -7,8 +7,10 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import Button from '@material-ui/core/Button';
 
 import './App.css';
+
 const data = [
 	{
 		id: 1,
@@ -68,43 +70,51 @@ const App = () => {
 	return (
 		<React.Fragment>
 			<h1>Bento Cats Project</h1>
+			<Button variant='contained' color='secondary'>
+				View Only Favorite Cards
+			</Button>
 
-			<Grid container style={{ paddingLeft: 60, paddingTop: 40, paddingRight: 60 }} spacing={2}>
+			<Grid container className='container'>
 				{hash.map((card, i) => {
 					return (
-						<Grid item xs={12} sm={6} md={4} lg={3} key={card.id}>
+						<Grid className='item' item xs={12} sm={6} md={4} lg={3} key={card.id}>
 							<Card>
 								<CardContent>
 									<CardMedia style={{ height: 450 }} image={card.url} title={card.id} />
-									<Typography variant='body2' component='p'>
-										{card.fact}
-									</Typography>
-									<IconButton
-										onClick={() => {
-											const restD = hash.filter((el) => el.id !== card.id);
-											card.favorite
-												? setHash([
-														...restD,
-														{
-															id: card.id,
-															url: card.url,
-															fact: card.fact,
-															favorite: !card.favorite,
-														},
-												  ])
-												: setHash([
-														{
-															id: card.id,
-															url: card.url,
-															fact: card.fact,
-															favorite: !card.favorite,
-														},
-														...restD,
-												  ]);
-										}}
-										aria-label='add to favorites'>
-										<FavoriteIcon color={card.favorite ? 'secondary' : 'inherit'} />
-									</IconButton>
+									<div className='content'>
+										<Typography variant='body2' component='p'>
+											{card.fact}
+										</Typography>
+										<br />
+										<div className='icon'>
+											<IconButton
+												onClick={() => {
+													const restD = hash.filter((el) => el.id !== card.id);
+													card.favorite
+														? setHash([
+																...restD,
+																{
+																	id: card.id,
+																	url: card.url,
+																	fact: card.fact,
+																	favorite: !card.favorite,
+																},
+														  ])
+														: setHash([
+																{
+																	id: card.id,
+																	url: card.url,
+																	fact: card.fact,
+																	favorite: !card.favorite,
+																},
+																...restD,
+														  ]);
+												}}
+												aria-label='add to favorites'>
+												<FavoriteIcon color={card.favorite ? 'secondary' : 'inherit'} />
+											</IconButton>
+										</div>
+									</div>
 								</CardContent>
 							</Card>
 						</Grid>
