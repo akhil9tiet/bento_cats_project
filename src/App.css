@@ -1,1 +1,42 @@
+body {
+	padding: 2%;
+}
 
+.container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+@media all and (min-width: 40em) {
+	.item {
+		width: 50%;
+	}
+}
+@media all and (min-width: 60em) {
+	.item {
+		width: 33.33%;
+	}
+}
+
+.item {
+	display: flex;
+	padding: 0.8em;
+	width: 100%;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	padding: 1em;
+	font-size: 1rem;
+	width: 92%;
+}
+
+.content p {
+	flex: 1 0 auto;
+}
+
+.content svg {
+	flex: 1 0 auto;
+}
