@@ -17,21 +17,22 @@ const Data = () => {
 	// 		);
 	// }, [data]);
 
-	console.log(data);
+	// console.log(data);
 
 	useEffect(() => {
 		catImage();
 		catFact();
-	}, [catFact, catImage, data]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	async function catImage() {
 		const resultImg = await axios.get('https://api.thecatapi.com/api/images/get?format=json&results_per_page=25');
-		setData({ ...data, catsImg: resultImg });
+		setData({ ...data, catsImg: resultImg.data });
 	}
 
 	async function catFact() {
 		const resultFact = await axios.get('https://catfact.ninja/facts?limit=25');
-		setData({ ...data, catsFact: resultFact });
+		setData({ ...data, catsFact: resultFact.data.data });
 	}
 
 	console.log(data);
