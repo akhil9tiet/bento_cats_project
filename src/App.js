@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Data from './Data';
 
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -67,61 +70,122 @@ const data = [
 const App = () => {
 	const [hash, setHash] = useState(data);
 
-	return (
-		<React.Fragment>
-			<h1>Bento Cats Project</h1>
-			<Button variant='contained' color='secondary'>
-				View Only Favorite Cards
-			</Button>
+	// useEffect(() => {
+	// 	let result = {};
+	// 	async function fetchData() {
+	// 		result = await axios.get('https://thecatapi.com/api/images/get?format=json&results_per_page=25', {
+	// 			headers: { 'Content-Type': 'application/json' },
+	// 		});
+	// 	}
+	// 	fetchData();
 
-			<Grid container className='container'>
-				{hash.map((card, i) => {
-					return (
-						<Grid className='item' item xs={12} sm={6} md={4} lg={3} key={card.id}>
-							<Card>
-								<CardContent>
-									<CardMedia style={{ height: 450 }} image={card.url} title={card.id} />
-									<div className='content'>
-										<Typography variant='body2' component='p'>
-											{card.fact}
-										</Typography>
-										<br />
-										<div className='icon'>
-											<IconButton
-												onClick={() => {
-													const restD = hash.filter((el) => el.id !== card.id);
-													card.favorite
-														? setHash([
-																...restD,
-																{
-																	id: card.id,
-																	url: card.url,
-																	fact: card.fact,
-																	favorite: !card.favorite,
-																},
-														  ])
-														: setHash([
-																{
-																	id: card.id,
-																	url: card.url,
-																	fact: card.fact,
-																	favorite: !card.favorite,
-																},
-																...restD,
-														  ]);
-												}}
-												aria-label='add to favorites'>
-												<FavoriteIcon color={card.favorite ? 'secondary' : 'inherit'} />
-											</IconButton>
-										</div>
-									</div>
-								</CardContent>
-							</Card>
-						</Grid>
-					);
-				})}
-			</Grid>
-		</React.Fragment>
+	// 	console.log(result.data);
+	// }, []);
+
+	// useEffect(async () => {
+	// 	const result = await axios('http://thecatapi.com/api/images/get?format=json&results_per_page=25');
+	// 	setHash(result.data);
+	// }, []);
+
+	// useEffect(() => {
+	// 	const catImageAPI = 'http://thecatapi.com/api/images/get?format=json&results_per_page=25';
+	// 	const catFactAPI = 'http://cors-proxy.htmldriven.com/?url=https://catfact.ninja/facts?limit=25';
+	// 	const catArray = [];
+	// 	const imageArray = [];
+	// 	axios
+	// 		.get(catImageAPI)
+	// 		.then((result) => new window.DOMParser().parseFromString(result.data, 'text/xml'))
+	// 		.then(
+	// 			(data) => {
+	// 				// parsing XML to get link to each image
+	// 				for (let i = 0; i < 25; i++) {
+	// 					imageArray.push(data.getElementsByTagName('image')[i].childNodes[1].innerHTML);
+	// 				}
+	// 			},
+	// 			(error) => {
+	// 				console.log('error:', error);
+	// 			}
+	// 		)
+	// 		.then(
+	// 			axios.get(catFactAPI).then(
+	// 				(result) => {
+	// 					const factArray = JSON.parse(result.data.body).data;
+	// 					// constructing each cat object to store in cat array in state
+	// 					for (let i = 0; i < factArray.length; i++) {
+	// 						let catObj = {};
+	// 						catObj['id'] = i;
+	// 						catObj['url'] = imageArray[i];
+	// 						catObj['fact'] = factArray[i].fact;
+	// 						catObj['favorite'] = false;
+	// 						catArray.push(catObj);
+	// 					}
+	// 					setHash(catArray);
+	// 				},
+	// 				(error) => {
+	// 					console.log('error:', error);
+	// 				}
+	// 			)
+	// 		);
+	// }, []);
+
+	console.log(hash);
+
+	return (
+		// <React.Fragment>
+		// 	<h1>Bento Cats Project</h1>
+		// 	<Button variant='contained' color='secondary'>
+		// 		View Only Favorite Cards
+		// 	</Button>
+
+		// 	<Grid container className='container'>
+		// 		{hash.map((card, i) => {
+		// 			return (
+		// 				<Grid className='item' item xs={12} sm={6} md={4} lg={3} key={card.id}>
+		// 					<Card>
+		// 						<CardContent>
+		// 							<CardMedia style={{ height: 450 }} image={card.url} title={card.id} />
+		// 							<div className='content'>
+		// 								<Typography variant='body2' component='p'>
+		// 									{card.fact}
+		// 								</Typography>
+		// 								<br />
+		// 								<div className='icon'>
+		// 									<IconButton
+		// 										onClick={() => {
+		// 											const restD = hash.filter((el) => el.id !== card.id);
+		// 											card.favorite
+		// 												? setHash([
+		// 														...restD,
+		// 														{
+		// 															id: card.id,
+		// 															url: card.url,
+		// 															fact: card.fact,
+		// 															favorite: !card.favorite,
+		// 														},
+		// 												  ])
+		// 												: setHash([
+		// 														{
+		// 															id: card.id,
+		// 															url: card.url,
+		// 															fact: card.fact,
+		// 															favorite: !card.favorite,
+		// 														},
+		// 														...restD,
+		// 												  ]);
+		// 										}}
+		// 										aria-label='add to favorites'>
+		// 										<FavoriteIcon color={card.favorite ? 'secondary' : 'inherit'} />
+		// 									</IconButton>
+		// 								</div>
+		// 							</div>
+		// 						</CardContent>
+		// 					</Card>
+		// 				</Grid>
+		// 			);
+		// 		})}
+		// 	</Grid>
+		// </React.Fragment>
+		<Data />
 	);
 };
 
