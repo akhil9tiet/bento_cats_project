@@ -14,178 +14,142 @@ import Button from '@material-ui/core/Button';
 
 import './App.css';
 
-const data = [
-	{
-		id: 1,
-		url: 'https://25.media.tumblr.com/tumblr_mcpa8zbbiZ1qze0hyo1_500.jpg',
-		fact: "The cat's footpads absorb the shocks of the landing when the cat jumps.",
-		favorite: false,
-	},
-	{
-		id: 2,
-		url: 'https://s3.us-west-2.amazonaws.com/cdn2.thecatapi.com/images/538.gif',
-		fact:
-			'In 1888, more than 300,000 mummified cats were found an Egyptian cemetery. They were stripped of their wrappings and carted off to be used by farmers in England and the U.S. for fertilizer.',
-		favorite: false,
-	},
-	{
-		id: 3,
-		url: 'https://25.media.tumblr.com/Jjkybd3nS9i6ue722w9M27AG_500.jpg',
-		fact: 'Blue-eyed, white cats are often prone to deafness.',
-		favorite: false,
-	},
-	{
-		id: 4,
-		url: 'https://25.media.tumblr.com/tumblr_m2y7ezQvl81rnn1i7o1_500.jpg',
-		fact: 'A happy cat holds her tail high and steady.',
-		favorite: false,
-	},
-	{
-		id: 5,
-		url: 'https://s3.us-west-2.amazonaws.com/cdn2.thecatapi.com/images/80i.gif',
-		fact: "The cat's footpads absorb the shocks of the landing when the cat jumps.",
-		favorite: false,
-	},
-	{
-		id: 6,
-		url: 'https://s3.us-west-2.amazonaws.com/cdn2.thecatapi.com/images/FwgiToYPs.jpg',
-		fact:
-			'Cats don’t have sweat glands over their bodies like humans do. Instead, they sweat only through their paws.',
-		favorite: false,
-	},
-	{
-		id: 7,
-		url: 'https://s3.us-west-2.amazonaws.com/cdn2.thecatapi.com/images/GpaWAyWT6.jpg',
-		fact: 'The first cat show was organized in 1871 in London. Cat shows later became a worldwide craze.',
-		favorite: false,
-	},
-	{
-		id: 8,
-		url: 'https://s3.us-west-2.amazonaws.com/cdn2.thecatapi.com/images/CfvDVOap6.jpg',
-		fact:
-			'The lightest cat on record is a blue point Himalayan called Tinker Toy, who weighed 1 pound, 6 ounces (616 g). Tinker Toy was 2.75 inches (7 cm) tall and 7.5 inches (19 cm) long.',
-		favorite: false,
-	},
-];
+// const data = [
+// 	{
+// 		id: 1,
+// 		url: 'https://25.media.tumblr.com/tumblr_mcpa8zbbiZ1qze0hyo1_500.jpg',
+// 		fact: "The cat's footpads absorb the shocks of the landing when the cat jumps.",
+// 		favorite: false,
+// 	},
+// 	{
+// 		id: 2,
+// 		url: 'https://s3.us-west-2.amazonaws.com/cdn2.thecatapi.com/images/538.gif',
+// 		fact:
+// 			'In 1888, more than 300,000 mummified cats were found an Egyptian cemetery. They were stripped of their wrappings and carted off to be used by farmers in England and the U.S. for fertilizer.',
+// 		favorite: false,
+// 	},
+// 	{
+// 		id: 3,
+// 		url: 'https://25.media.tumblr.com/Jjkybd3nS9i6ue722w9M27AG_500.jpg',
+// 		fact: 'Blue-eyed, white cats are often prone to deafness.',
+// 		favorite: false,
+// 	},
+// 	{
+// 		id: 4,
+// 		url: 'https://25.media.tumblr.com/tumblr_m2y7ezQvl81rnn1i7o1_500.jpg',
+// 		fact: 'A happy cat holds her tail high and steady.',
+// 		favorite: false,
+// 	},
+// 	{
+// 		id: 5,
+// 		url: 'https://s3.us-west-2.amazonaws.com/cdn2.thecatapi.com/images/80i.gif',
+// 		fact: "The cat's footpads absorb the shocks of the landing when the cat jumps.",
+// 		favorite: false,
+// 	},
+// 	{
+// 		id: 6,
+// 		url: 'https://s3.us-west-2.amazonaws.com/cdn2.thecatapi.com/images/FwgiToYPs.jpg',
+// 		fact:
+// 			'Cats don’t have sweat glands over their bodies like humans do. Instead, they sweat only through their paws.',
+// 		favorite: false,
+// 	},
+// 	{
+// 		id: 7,
+// 		url: 'https://s3.us-west-2.amazonaws.com/cdn2.thecatapi.com/images/GpaWAyWT6.jpg',
+// 		fact: 'The first cat show was organized in 1871 in London. Cat shows later became a worldwide craze.',
+// 		favorite: false,
+// 	},
+// 	{
+// 		id: 8,
+// 		url: 'https://s3.us-west-2.amazonaws.com/cdn2.thecatapi.com/images/CfvDVOap6.jpg',
+// 		fact:
+// 			'The lightest cat on record is a blue point Himalayan called Tinker Toy, who weighed 1 pound, 6 ounces (616 g). Tinker Toy was 2.75 inches (7 cm) tall and 7.5 inches (19 cm) long.',
+// 		favorite: false,
+// 	},
+// ];
 const App = () => {
-	const [hash, setHash] = useState(data);
+	const [hash, setHash] = useState({
+		catsData: [],
+		// notFavoriteCatsData: [],
+		showFav: false,
+	});
 
-	// useEffect(() => {
-	// 	let result = {};
-	// 	async function fetchData() {
-	// 		result = await axios.get('https://thecatapi.com/api/images/get?format=json&results_per_page=25', {
-	// 			headers: { 'Content-Type': 'application/json' },
-	// 		});
-	// 	}
-	// 	fetchData();
-
-	// 	console.log(result.data);
-	// }, []);
-
-	// useEffect(async () => {
-	// 	const result = await axios('http://thecatapi.com/api/images/get?format=json&results_per_page=25');
-	// 	setHash(result.data);
-	// }, []);
-
-	// useEffect(() => {
-	// 	const catImageAPI = 'http://thecatapi.com/api/images/get?format=json&results_per_page=25';
-	// 	const catFactAPI = 'http://cors-proxy.htmldriven.com/?url=https://catfact.ninja/facts?limit=25';
-	// 	const catArray = [];
-	// 	const imageArray = [];
-	// 	axios
-	// 		.get(catImageAPI)
-	// 		.then((result) => new window.DOMParser().parseFromString(result.data, 'text/xml'))
-	// 		.then(
-	// 			(data) => {
-	// 				// parsing XML to get link to each image
-	// 				for (let i = 0; i < 25; i++) {
-	// 					imageArray.push(data.getElementsByTagName('image')[i].childNodes[1].innerHTML);
-	// 				}
-	// 			},
-	// 			(error) => {
-	// 				console.log('error:', error);
-	// 			}
-	// 		)
-	// 		.then(
-	// 			axios.get(catFactAPI).then(
-	// 				(result) => {
-	// 					const factArray = JSON.parse(result.data.body).data;
-	// 					// constructing each cat object to store in cat array in state
-	// 					for (let i = 0; i < factArray.length; i++) {
-	// 						let catObj = {};
-	// 						catObj['id'] = i;
-	// 						catObj['url'] = imageArray[i];
-	// 						catObj['fact'] = factArray[i].fact;
-	// 						catObj['favorite'] = false;
-	// 						catArray.push(catObj);
-	// 					}
-	// 					setHash(catArray);
-	// 				},
-	// 				(error) => {
-	// 					console.log('error:', error);
-	// 				}
-	// 			)
-	// 		);
-	// }, []);
+	useEffect(() => {
+		const fetchData = async () => {
+			const imgData = await axios.get('https://api.thecatapi.com/api/images/get?format=json&results_per_page=25');
+			const factsData = await axios.get('https://catfact.ninja/facts?limit=25');
+			console.log(factsData);
+			const catsArray = [];
+			for (let i = 0; i < 25; i++) {
+				let catObj = {};
+				catObj['id'] = i;
+				catObj['image'] = imgData.data[i].url;
+				catObj['fact'] = factsData.data.data[i].fact;
+				catObj['favorite'] = 'false';
+				catsArray.push(catObj);
+			}
+			setHash({ ...hash, catsData: catsArray });
+		};
+		fetchData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	console.log(hash);
 
 	return (
-		// <React.Fragment>
-		// 	<h1>Bento Cats Project</h1>
-		// 	<Button variant='contained' color='secondary'>
-		// 		View Only Favorite Cards
-		// 	</Button>
+		<React.Fragment>
+			<h1>Bento Cats Project</h1>
+			<Button variant='contained' color='secondary'>
+				View Only Favorite Cards
+			</Button>
 
-		// 	<Grid container className='container'>
-		// 		{hash.map((card, i) => {
-		// 			return (
-		// 				<Grid className='item' item xs={12} sm={6} md={4} lg={3} key={card.id}>
-		// 					<Card>
-		// 						<CardContent>
-		// 							<CardMedia style={{ height: 450 }} image={card.url} title={card.id} />
-		// 							<div className='content'>
-		// 								<Typography variant='body2' component='p'>
-		// 									{card.fact}
-		// 								</Typography>
-		// 								<br />
-		// 								<div className='icon'>
-		// 									<IconButton
-		// 										onClick={() => {
-		// 											const restD = hash.filter((el) => el.id !== card.id);
-		// 											card.favorite
-		// 												? setHash([
-		// 														...restD,
-		// 														{
-		// 															id: card.id,
-		// 															url: card.url,
-		// 															fact: card.fact,
-		// 															favorite: !card.favorite,
-		// 														},
-		// 												  ])
-		// 												: setHash([
-		// 														{
-		// 															id: card.id,
-		// 															url: card.url,
-		// 															fact: card.fact,
-		// 															favorite: !card.favorite,
-		// 														},
-		// 														...restD,
-		// 												  ]);
-		// 										}}
-		// 										aria-label='add to favorites'>
-		// 										<FavoriteIcon color={card.favorite ? 'secondary' : 'inherit'} />
-		// 									</IconButton>
-		// 								</div>
-		// 							</div>
-		// 						</CardContent>
-		// 					</Card>
-		// 				</Grid>
-		// 			);
-		// 		})}
-		// 	</Grid>
-		// </React.Fragment>
-		<Data />
+			<Grid container className='container'>
+				{hash.catsData.map((card, i) => {
+					return (
+						<Grid className='item' item xs={12} sm={6} md={4} lg={3} key={card.id}>
+							<Card>
+								<CardContent>
+									<CardMedia style={{ height: 450 }} image={card.image} title={card.id} />
+									<div className='content'>
+										<Typography variant='body2' component='p'>
+											{card.fact}
+										</Typography>
+										<br />
+										<div className='icon'>
+											<IconButton
+												onClick={() => {
+													const restD = hash.catsData.filter((el) => el.id !== card.id);
+													card.favorite
+														? setHash({
+																...hash,
+																catsData: [
+																	{ ...card, favorite: !card.favorite },
+																	...restD,
+																],
+														  })
+														: setHash({
+																...hash,
+																catsData: [
+																	...restD,
+																	{ ...card, favorite: !card.favorite },
+																],
+														  });
+
+													console.log('hash', hash);
+												}}
+												aria-label='add to favorites'>
+												<FavoriteIcon color={card.favorite ? 'inherit' : 'secondary'} />
+											</IconButton>
+										</div>
+									</div>
+								</CardContent>
+							</Card>
+						</Grid>
+					);
+				})}
+			</Grid>
+		</React.Fragment>
+		// <Data />
 	);
 };
 

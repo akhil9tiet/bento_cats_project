@@ -22,10 +22,8 @@ const Data = () => {
 				catObj['favorite'] = 'false';
 				catsArray.push(catObj);
 			}
-
 			setData({ ...data, catsData: catsArray });
 		};
-
 		fetchData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
