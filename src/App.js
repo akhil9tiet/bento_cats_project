@@ -134,8 +134,6 @@ const App = () => {
 																	{ ...card, favorite: !card.favorite },
 																],
 														  });
-
-													console.log('hash', hash);
 												}}
 												aria-label='add to favorites'>
 												<FavoriteIcon color={card.favorite ? 'inherit' : 'secondary'} />
