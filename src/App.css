@@ -7,6 +7,14 @@ body {
 	flex-wrap: wrap;
 }
 
+.card {
+	opacity: 0.6;
+}
+
+.card:hover {
+	opacity: 1;
+}
+
 @media all and (min-width: 40em) {
 	.item {
 		width: 50%;

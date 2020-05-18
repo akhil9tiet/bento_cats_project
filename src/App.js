@@ -71,10 +71,14 @@ const App = () => {
 			<Grid container className='container'>
 				{hash.catsdata.map((card, i) => {
 					return (
-						<Grid className='item' item xs={12} sm={6} md={4} lg={3} key={card.id}>
-							<Card>
+						<Grid className='item' item xs={12} sm={12} md={4} lg={3} key={card.id}>
+							<Card className='card'>
 								<CardContent>
-									<CardMedia style={{ height: 450 }} image={card.image} title={card.id} />
+									<CardMedia
+										style={{ height: 450, width: '100%' }}
+										image={card.image}
+										title={card.id}
+									/>
 									<div className='content'>
 										<Typography variant='body2' component='p'>
 											{card.fact}
