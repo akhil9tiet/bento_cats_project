@@ -73,7 +73,7 @@ const App = () => {
 					return (
 						<Grid className='item' item xs={12} sm={12} md={4} lg={3} key={card.id}>
 							<Card className='card'>
-								<CardContent>
+								<CardContent className='cardContent'>
 									<CardMedia
 										style={{ height: 450, width: '100%' }}
 										image={card.image}
