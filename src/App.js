@@ -81,7 +81,7 @@ const App = () => {
 			<Grid container className='container'>
 				{hash.catsdata.map((card, i) => {
 					return (
-						<Grid className='item' item xs={12} sm={12} md={4} lg={3} key={card.id}>
+						<Grid className='item' item xs={12} sm={6} md={4} lg={3} key={card.id}>
 							<Card className='card'>
 								<CardContent>
 									<CardMedia
