@@ -41,16 +41,18 @@ const App = () => {
 	}, []);
 
 	console.log(hash);
+	const favoriteCatsData = hash.catsdata.filter((d) => d.favorite);
 
 	return (
 		<React.Fragment>
 			<h1>Bento Cats Project</h1>
 			<Button
+				disabled={favoriteCatsData.length === 0}
 				variant='contained'
 				color={hash.showFav ? 'secondary' : 'inherit'}
 				onClick={() => {
 					// const nonFavoritecatsdata = hash.catsdata.filter((d) => !d.favorite);
-					const favoriteCatsData = hash.catsdata.filter((d) => d.favorite);
+					// const favoriteCatsData = hash.catsdata.filter((d) => d.favorite);
 
 					if (hash.showFav) {
 						setHash({
