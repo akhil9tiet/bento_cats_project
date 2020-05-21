@@ -47,7 +47,7 @@ const App = () => {
 			<h1>Bento Cats Project</h1>
 			<Button
 				variant='contained'
-				color='secondary'
+				color={hash.showFav ? 'secondary' : 'inherit'}
 				onClick={() => {
 					// const nonFavoritecatsdata = hash.catsdata.filter((d) => !d.favorite);
 					const favoriteCatsData = hash.catsdata.filter((d) => d.favorite);
@@ -66,7 +66,7 @@ const App = () => {
 							showFav: true,
 						});
 					}
-				}}>{`Showing ${hash.showFav ? 'Fav' : 'All'}`}</Button>
+				}}>{`Show ${hash.showFav ? 'All' : 'Fav'}`}</Button>
 
 			<Grid container className='container'>
 				{hash.catsdata.map((card, i) => {
