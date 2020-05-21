@@ -55,18 +55,26 @@ const App = () => {
 					// const favoriteCatsData = hash.catsdata.filter((d) => d.favorite);
 
 					if (hash.showFav) {
-						setHash({
-							...hash,
-							catsdata: [...favoriteCatsData, ...hash.notFavoriteCatsData],
-							showFav: false,
-						});
+						setTimeout(
+							() =>
+								setHash({
+									...hash,
+									catsdata: [...favoriteCatsData, ...hash.notFavoriteCatsData],
+									showFav: false,
+								}),
+							1000
+						);
 					} else {
-						setHash({
-							...hash,
-							notFavoriteCatsData: hash.catsdata.filter((d) => !d.favorite),
-							catsdata: [...favoriteCatsData],
-							showFav: true,
-						});
+						setTimeout(
+							() =>
+								setHash({
+									...hash,
+									notFavoriteCatsData: hash.catsdata.filter((d) => !d.favorite),
+									catsdata: [...favoriteCatsData],
+									showFav: true,
+								}),
+							900
+						);
 					}
 				}}>{`Show ${hash.showFav ? 'All' : 'Fav'}`}</Button>
 
