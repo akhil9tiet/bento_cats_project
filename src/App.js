@@ -41,37 +41,47 @@ const App = () => {
 	}, []);
 
 	console.log(hash);
+	const favoriteCatsData = hash.catsdata.filter((d) => d.favorite);
 
 	return (
 		<React.Fragment>
 			<h1>Bento Cats Project</h1>
 			<Button
+				disabled={favoriteCatsData.length === 0}
 				variant='contained'
-				color='secondary'
+				color={hash.showFav ? 'secondary' : 'inherit'}
 				onClick={() => {
 					// const nonFavoritecatsdata = hash.catsdata.filter((d) => !d.favorite);
-					const favoriteCatsData = hash.catsdata.filter((d) => d.favorite);
+					// const favoriteCatsData = hash.catsdata.filter((d) => d.favorite);
 
 					if (hash.showFav) {
-						setHash({
-							...hash,
-							catsdata: [...favoriteCatsData, ...hash.notFavoriteCatsData],
-							showFav: false,
-						});
+						setTimeout(
+							() =>
+								setHash({
+									...hash,
+									catsdata: [...favoriteCatsData, ...hash.notFavoriteCatsData],
+									showFav: false,
+								}),
+							1000
+						);
 					} else {
-						setHash({
-							...hash,
-							notFavoriteCatsData: hash.catsdata.filter((d) => !d.favorite),
-							catsdata: [...favoriteCatsData],
-							showFav: true,
-						});
+						setTimeout(
+							() =>
+								setHash({
+									...hash,
+									notFavoriteCatsData: hash.catsdata.filter((d) => !d.favorite),
+									catsdata: [...favoriteCatsData],
+									showFav: true,
+								}),
+							900
+						);
 					}
-				}}>{`Showing ${hash.showFav ? 'Fav' : 'All'}`}</Button>
+				}}>{`Show ${hash.showFav ? 'All' : 'Fav'}`}</Button>
 
 			<Grid container className='container'>
 				{hash.catsdata.map((card, i) => {
 					return (
-						<Grid className='item' item xs={12} sm={12} md={4} lg={3} key={card.id}>
+						<Grid className='item' item xs={12} sm={6} md={4} lg={3} key={card.id}>
 							<Card className='card'>
 								<CardContent>
 									<CardMedia
