@@ -50,10 +50,7 @@ const App = () => {
 				disabled={favoriteCatsData.length === 0}
 				variant='contained'
 				color={hash.showFav ? 'secondary' : 'inherit'}
-				onClick={() => {
-					// const nonFavoritecatsdata = hash.catsdata.filter((d) => !d.favorite);
-					// const favoriteCatsData = hash.catsdata.filter((d) => d.favorite);
-
+				onClick={() => {		
 					if (hash.showFav) {
 						setTimeout(
 							() =>

@@ -47,18 +47,25 @@ body {
 .content {
 	display: flex;
 	flex-direction: column;
+	flex: 1;
 	background-color: #ffff46d0;
-	justify-content: space-evenly;
+	align-content: stretch;
+	justify-content: stretch;
 	padding-top: 1em;
-	font-size: 1em;
 	width: 100%;
 }
 
-/* .content p {
+.content p {
+	display: flex;
 	flex: 1 0 auto;
-} */
+	align-content: stretch;
+	font-size: 1em;
+
+	background-color: #466e3fd0;
+}
 
 .icon {
+	background-color: #6e46ffd0;
 	align-content: flex-start;
 }
 
