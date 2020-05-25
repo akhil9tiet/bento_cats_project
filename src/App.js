@@ -51,9 +51,6 @@ const App = () => {
 				variant='contained'
 				color={hash.showFav ? 'secondary' : 'inherit'}
 				onClick={() => {
-					// const nonFavoritecatsdata = hash.catsdata.filter((d) => !d.favorite);
-					// const favoriteCatsData = hash.catsdata.filter((d) => d.favorite);
-
 					if (hash.showFav) {
 						setTimeout(
 							() =>
@@ -83,7 +80,7 @@ const App = () => {
 					return (
 						<Grid className='item' item xs={12} sm={6} md={4} lg={3} key={card.id}>
 							<Card className='card'>
-								<CardContent>
+								<CardContent className='card-content'>
 									<CardMedia
 										style={{ height: 450, width: '100%' }}
 										image={card.image}

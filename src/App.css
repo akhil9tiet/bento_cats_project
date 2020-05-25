@@ -1,21 +1,17 @@
 body {
 	padding: 2%;
-	background: linear-gradient(356deg, rgba(2, 0, 36, 1) 0%, rgba(240, 245, 252, 1) 0%, rgba(224, 229, 236, 1) 100%);
+	background: #e0e5ec;
 }
-
+/* list */
 .container {
 	display: flex;
 	flex-wrap: wrap;
 }
-
-.card {
-	opacity: 0.6;
-	min-width: 100%;
-	max-width: 100%;
-}
-
-.card:hover {
-	opacity: 1;
+/* list-item */
+.item {
+	display: flex;
+	padding: 0.8em;
+	width: 100%;
 }
 
 @media all and (min-width: 40em) {
@@ -28,26 +24,61 @@ body {
 		width: 33.33%;
 	}
 }
-
-.item {
-	display: flex;
-	padding: 0.8em;
-	width: 100%;
+/*  */
+.card {
+	opacity: 0.6;
+	min-width: 100%;
+	max-width: 100%;
 }
+
+.card:hover::before {
+	/* opacity: 1; */
+	transform: scale(1.1);
+	box-shadow: 0 0 15px #ffee10;
+}
+.card:hover {
+	opacity: 1;
+	box-shadow: 8px 8px 20px #c3c7cd, -8px -8px 20px #fdffff;
+	text-shadow: 8px 8px 20px #c3c7cd, -8px -8px 20px #fdffff;
+}
+
+/* list-content */
 
 .content {
 	display: flex;
 	flex-direction: column;
-	background-color: #fff;
-	padding: 1em;
-	font-size: 1rem;
-	width: 92%;
+	flex: 1;
+	align-content: stretch;
+	justify-content: stretch;
+	padding-top: 1em;
+	width: 100%;
 }
 
 .content p {
+	display: flex;
 	flex: 1 0 auto;
+	align-content: stretch;
+	font-size: 1em;
+	padding: 0 10px;
 }
 
-.content svg {
-	flex: 1 0 auto;
+.icon {
+	align-content: flex-start;
 }
+
+/*
+Credits: Mr. Asif Biryani
+for helping with this CSS piece
+*/
+.card-content {
+	padding: 0 !important;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+}
+
+/*
+Credits: The card css using flexbox
+https://codepen.io/lottejackson/pen/PwvjPj?editors=1100
+*/
