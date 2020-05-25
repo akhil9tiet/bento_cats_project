@@ -48,7 +48,6 @@ body {
 	display: flex;
 	flex-direction: column;
 	flex: 1;
-	background-color: #ffff46d0;
 	align-content: stretch;
 	justify-content: stretch;
 	padding-top: 1em;
@@ -60,13 +59,23 @@ body {
 	flex: 1 0 auto;
 	align-content: stretch;
 	font-size: 1em;
-
-	background-color: #466e3fd0;
+	padding: 0 10px;
 }
 
 .icon {
-	background-color: #6e46ffd0;
 	align-content: flex-start;
+}
+
+/*
+Credits: Mr. Asif Biryani
+for helping with this CSS piece
+*/
+.card-content {
+	padding: 0 !important;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
 }
 
 /*
