@@ -1,6 +1,6 @@
 # Bento Cats Project
 
-## [Live Demo](bento-cats-project.vercel.app)
+## [Live Demo](https://bento-cats-project.vercel.app)
 
 ## Description
 
