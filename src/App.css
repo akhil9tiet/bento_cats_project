@@ -13,6 +13,20 @@ body {
 	padding: 0.8em;
 	width: 100%;
 }
+/*************************************************************
+* The following lines help to show only one card on hover
+* https://css-tricks.com/hover-on-everything-but/
+**************************************************************/
+.container:hover > .item {
+	filter: brightness(70%) blur(2px) grayscale(80%);
+	transition: 0.9s;
+}
+
+.container:hover > .item:hover {
+	filter: brightness(100%);
+	transition: 0.9s;
+}
+/*************************************************************/
 
 @media all and (min-width: 40em) {
 	.item {
@@ -26,18 +40,13 @@ body {
 }
 /*  */
 .card {
-	opacity: 0.6;
+	/* opacity: 0.6; */
 	min-width: 100%;
 	max-width: 100%;
 }
 
-.card:hover::before {
-	/* opacity: 1; */
-	transform: scale(1.1);
-	box-shadow: 0 0 15px #ffee10;
-}
 .card:hover {
-	opacity: 1;
+	/* opacity: 1; */
 	box-shadow: 8px 8px 20px #c3c7cd, -8px -8px 20px #fdffff;
 	text-shadow: 8px 8px 20px #c3c7cd, -8px -8px 20px #fdffff;
 }
