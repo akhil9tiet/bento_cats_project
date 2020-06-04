@@ -13,7 +13,10 @@ body {
 	padding: 0.8em;
 	width: 100%;
 }
-
+/*************************************************************
+* The following lines help to show only one card on hover
+* https://css-tricks.com/hover-on-everything-but/
+**************************************************************/
 .container:hover > .item {
 	filter: brightness(70%) blur(2px) grayscale(80%);
 	transition: 0.9s;
@@ -23,6 +26,7 @@ body {
 	filter: brightness(100%);
 	transition: 0.9s;
 }
+/*************************************************************/
 
 @media all and (min-width: 40em) {
 	.item {
