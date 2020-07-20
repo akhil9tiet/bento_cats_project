@@ -21,7 +21,7 @@ const App = () => {
 	// });
 	const [catsData, setCatsData] = useState([]);
 	// const [notfavoriteCatsData, setNotfavoriteCatsData] = useState([]);
-	// const [showFav, setUseFav] = useState(false);
+	const [showFav, setShowFav] = useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -47,34 +47,11 @@ const App = () => {
 	return (
 		<React.Fragment>
 			<h1>Bento Cats Project</h1>
-			{/* <Button
-				disabled={favoriteCatsData.length === 0}
+			<Button
+				// disabled={favoriteCatsData.length === 0}
 				variant='contained'
-				color={hash.showFav ? 'secondary' : 'inherit'}
-				onClick={() => {
-					if (hash.showFav) {
-						setTimeout(
-							() =>
-								setHash({
-									...hash,
-									catsdata: [...favoriteCatsData, ...hash.notFavoriteCatsData],
-									showFav: false,
-								}),
-							1000
-						);
-					} else {
-						setTimeout(
-							() =>
-								setHash({
-									...hash,
-									notFavoriteCatsData: hash.catsdata.filter((d) => !d.favorite),
-									catsdata: [...favoriteCatsData],
-									showFav: true,
-								}),
-							900
-						);
-					}
-				}}>{`Show ${hash.showFav ? 'All' : 'Fav'}`}</Button> */}
+				color={showFav ? 'secondary' : 'inherit'}
+				onClick={() => setShowFav(!showFav)}>{`Show ${showFav ? 'All' : 'Fav'}`}</Button>
 
 			<Grid container className='container'>
 				{catsData &&
