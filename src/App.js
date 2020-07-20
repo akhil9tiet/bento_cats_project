@@ -45,9 +45,6 @@ const App = () => {
 	// const favoriteCatsData = catsData && catsData.filter((d) => d.favorite);
 
 	const handleClick = (evt) => {
-		/**********************************/
-		//@known_as_bmf's solution: https://stackblitz.com/edit/react-hooks-demo-xeyy4e
-		/*********************************/
 		const id = parseInt(evt.target.dataset.target);
 		console.log(id);
 		setCatsData((s) => s.map((c) => (c.id === id ? { ...c, fav: !c.fav } : c)));
@@ -104,8 +101,16 @@ const App = () => {
 											<br />
 											<div className='icon'>
 												<IconButton
-													onClick={handleClick}
-													data-target={card.id}
+													onClick={() =>
+														/******************************************************************************/
+														//@known_as_bmf's solution: https://stackblitz.com/edit/react-hooks-demo-xeyy4e
+														/******************************************************************************/
+														setCatsData((prevState) =>
+															prevState.map((c) =>
+																c.id === card.id ? { ...c, favorite: !c.favorite } : c
+															)
+														)
+													}
 													aria-label='add to favorites'>
 													<FavoriteIcon
 														color={catsData && card.favorite ? 'secondary' : 'inherit'}
