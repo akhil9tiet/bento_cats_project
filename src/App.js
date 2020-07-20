@@ -44,12 +44,6 @@ const App = () => {
 	console.log(catsData);
 	// const favoriteCatsData = catsData && catsData.filter((d) => d.favorite);
 
-	const handleClick = (evt) => {
-		const id = parseInt(evt.target.dataset.target);
-		console.log(id);
-		setCatsData((s) => s.map((c) => (c.id === id ? { ...c, fav: !c.fav } : c)));
-	};
-
 	return (
 		<React.Fragment>
 			<h1>Bento Cats Project</h1>
