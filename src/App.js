@@ -14,17 +14,19 @@ import Button from '@material-ui/core/Button';
 import './App.css';
 
 const App = () => {
-	const [hash, setHash] = useState({
-		catsdata: [],
-		notFavoriteCatsData: [],
-		showFav: false,
-	});
+	// const [hash, setHash] = useState({
+	// 	catsdata: [],
+	// 	notFavoriteCatsData: [],
+	// 	showFav: false,
+	// });
+	const [catsData, setCatsData] = useState([]);
+	// const [notfavoriteCatsData, setNotfavoriteCatsData] = useState([]);
+	// const [showFav, setUseFav] = useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			const imgData = await axios.get('https://api.thecatapi.com/api/images/get?format=json&results_per_page=25');
 			const factsData = await axios.get('https://catfact.ninja/facts?limit=25');
-			console.log(factsData);
 			const catsArray = [];
 			for (let i = 0; i < 25; i++) {
 				let catObj = {};
@@ -34,19 +36,27 @@ const App = () => {
 				catObj['favorite'] = false;
 				catsArray.push(catObj);
 			}
-			setHash({ ...hash, catsdata: catsArray });
+			setCatsData(catsArray);
 		};
 		fetchData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+	console.log(catsData);
+	// const favoriteCatsData = catsData && catsData.filter((d) => d.favorite);
 
-	console.log(hash);
-	const favoriteCatsData = hash.catsdata.filter((d) => d.favorite);
+	const handleClick = (evt) => {
+		/**********************************/
+		//@known_as_bmf's solution: https://stackblitz.com/edit/react-hooks-demo-xeyy4e
+		/*********************************/
+		const id = parseInt(evt.target.dataset.target);
+		console.log(id);
+		setCatsData((s) => s.map((c) => (c.id === id ? { ...c, fav: !c.fav } : c)));
+	};
 
 	return (
 		<React.Fragment>
 			<h1>Bento Cats Project</h1>
-			<Button
+			{/* <Button
 				disabled={favoriteCatsData.length === 0}
 				variant='contained'
 				color={hash.showFav ? 'secondary' : 'inherit'}
@@ -73,58 +83,43 @@ const App = () => {
 							900
 						);
 					}
-				}}>{`Show ${hash.showFav ? 'All' : 'Fav'}`}</Button>
+				}}>{`Show ${hash.showFav ? 'All' : 'Fav'}`}</Button> */}
 
 			<Grid container className='container'>
-				{hash.catsdata.map((card, i) => {
-					return (
-						<Grid className='item' item xs={12} sm={6} md={4} lg={3} key={card.id}>
-							<Card className='card'>
-								<CardContent className='card-content'>
-									<CardMedia
-										style={{ height: 450, width: '100%' }}
-										image={card.image}
-										title={card.id}
-									/>
-									<div className='content'>
-										<Typography variant='body2' component='p'>
-											{card.fact}
-										</Typography>
-										<br />
-										<div className='icon'>
-											<IconButton
-												onClick={() => {
-													const restD = hash.catsdata.filter((el) => el.id !== card.id);
-
-													card.favorite
-														? setHash({
-																...hash,
-																catsdata: [
-																	...restD,
-																	{ ...card, favorite: !card.favorite },
-																],
-														  })
-														: setHash({
-																...hash,
-																catsdata: [
-																	{ ...card, favorite: !card.favorite },
-																	...restD,
-																],
-														  });
-												}}
-												aria-label='add to favorites'>
-												<FavoriteIcon color={card.favorite ? 'secondary' : 'inherit'} />
-											</IconButton>
+				{catsData &&
+					catsData.map((card, i) => {
+						return (
+							<Grid className='item' item xs={12} sm={6} md={4} lg={3} key={card.id}>
+								<Card className='card'>
+									<CardContent className='card-content'>
+										<CardMedia
+											style={{ height: 450, width: '100%' }}
+											image={card.image}
+											title={card.id}
+										/>
+										<div className='content'>
+											<Typography variant='body2' component='p'>
+												{card.fact}
+											</Typography>
+											<br />
+											<div className='icon'>
+												<IconButton
+													onClick={handleClick}
+													data-target={card.id}
+													aria-label='add to favorites'>
+													<FavoriteIcon
+														color={catsData && card.favorite ? 'secondary' : 'inherit'}
+													/>
+												</IconButton>
+											</div>
 										</div>
-									</div>
-								</CardContent>
-							</Card>
-						</Grid>
-					);
-				})}
+									</CardContent>
+								</Card>
+							</Grid>
+						);
+					})}
 			</Grid>
 		</React.Fragment>
-		// <Data />
 	);
 };
 
