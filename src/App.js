@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -19,25 +18,17 @@ function usePrevious(value) {
 	// The ref object is a generic container whose current property is mutable ...
 	// ... and can hold any value, similar to an instance property on a class
 	const ref = useRef();
-
 	// Store current value in ref
 	useEffect(() => {
 		ref.current = value;
 	}, [value]); // Only re-run if value changes
-
 	// Return previous value (happens before update in useEffect above)
 	return ref.current;
 }
 
 const App = () => {
-	// const [hash, setHash] = useState({
-	// 	catsdata: [],
-	// 	notFavoriteCatsData: [],
-	// 	showFav: false,
-	// });
 	const [catsData, setCatsData] = useState([]);
 	const prevCatsData = usePrevious(catsData);
-	// const [notfavoriteCatsData, setNotfavoriteCatsData] = useState([]);
 	const [showFav, setShowFav] = useState(false);
 
 	useEffect(() => {
@@ -58,7 +49,6 @@ const App = () => {
 		fetchData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-	// console.log(catsData);
 	const favoriteCatsData = catsData.filter((d) => d.favorite);
 	console.log(showFav);
 	return (
