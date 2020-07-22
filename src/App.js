@@ -42,16 +42,20 @@ const App = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	console.log(catsData);
-	// const favoriteCatsData = catsData && catsData.filter((d) => d.favorite);
+	const favoriteCatsData = catsData && catsData.filter((d) => d.favorite);
+	const restoredCatsData = catsData;
 
 	return (
 		<React.Fragment>
 			<h1>Bento Cats Project</h1>
 			<Button
-				// disabled={favoriteCatsData.length === 0}
+				disabled={favoriteCatsData.length === 0}
 				variant='contained'
 				color={showFav ? 'secondary' : 'inherit'}
-				onClick={() => setShowFav(!showFav)}>{`Show ${showFav ? 'All' : 'Fav'}`}</Button>
+				onClick={() => {
+					setShowFav(!showFav);
+					showFav ? setCatsData(favoriteCatsData) : setCatsData(restoredCatsData);
+				}}>{`Show ${showFav ? 'All' : 'Fav'}`}</Button>
 
 			<Grid container className='container'>
 				{catsData &&
