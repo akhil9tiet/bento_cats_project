@@ -50,7 +50,6 @@ const App = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	const favoriteCatsData = catsData.filter((d) => d.favorite);
-	console.log(showFav);
 	return (
 		<React.Fragment>
 			<h1>Bento Cats Project</h1>
