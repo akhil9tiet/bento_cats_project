@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 import Grid from '@material-ui/core/Grid';
@@ -10,8 +10,24 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Button from '@material-ui/core/Button';
-
 import './App.css';
+/***************************************************************/
+//usePrevious implementation : https://usehooks.com/usePrevious/
+/***************************************************************/
+
+function usePrevious(value) {
+	// The ref object is a generic container whose current property is mutable ...
+	// ... and can hold any value, similar to an instance property on a class
+	const ref = useRef();
+
+	// Store current value in ref
+	useEffect(() => {
+		ref.current = value;
+	}, [value]); // Only re-run if value changes
+
+	// Return previous value (happens before update in useEffect above)
+	return ref.current;
+}
 
 const App = () => {
 	// const [hash, setHash] = useState({
@@ -20,6 +36,7 @@ const App = () => {
 	// 	showFav: false,
 	// });
 	const [catsData, setCatsData] = useState([]);
+	const prevCatsData = usePrevious(catsData);
 	// const [notfavoriteCatsData, setNotfavoriteCatsData] = useState([]);
 	const [showFav, setShowFav] = useState(false);
 
@@ -41,10 +58,9 @@ const App = () => {
 		fetchData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-	console.log(catsData);
-	const favoriteCatsData = catsData && catsData.filter((d) => d.favorite);
-	const restoredCatsData = catsData;
-
+	// console.log(catsData);
+	const favoriteCatsData = catsData.filter((d) => d.favorite);
+	console.log(showFav);
 	return (
 		<React.Fragment>
 			<h1>Bento Cats Project</h1>
@@ -53,8 +69,8 @@ const App = () => {
 				variant='contained'
 				color={showFav ? 'secondary' : 'inherit'}
 				onClick={() => {
+					showFav ? setCatsData(prevCatsData) : setCatsData(favoriteCatsData);
 					setShowFav(!showFav);
-					showFav ? setCatsData(favoriteCatsData) : setCatsData(restoredCatsData);
 				}}>{`Show ${showFav ? 'All' : 'Fav'}`}</Button>
 
 			<Grid container className='container'>
