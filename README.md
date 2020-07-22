@@ -19,6 +19,8 @@ Some of the following specs are more ambiguous in nature. Feel free to interpret
 -   [x] Allow users to “favorite” an image (with attached fact) and allow users to view only favorited images
 -   [x] Allow users to view one photo and fact at a time
 
+## [Active POC](https://stackblitz.com/edit/react-hooks-demo-k7klkk)
+
 ## Available Scripts
 
 In the project directory, you can run:
