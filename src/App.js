@@ -14,22 +14,24 @@ import './App.css';
 //usePrevious implementation : https://usehooks.com/usePrevious/
 /***************************************************************/
 
-function usePrevious(value) {
-	// The ref object is a generic container whose current property is mutable ...
-	// ... and can hold any value, similar to an instance property on a class
-	const ref = useRef();
-	// Store current value in ref
-	useEffect(() => {
-		ref.current = value;
-	}, [value]); // Only re-run if value changes
-	// Return previous value (happens before update in useEffect above)
-	return ref.current;
-}
+// function usePrevious(value) {
+// 	// The ref object is a generic container whose current property is mutable ...
+// 	// ... and can hold any value, similar to an instance property on a class
+// 	const ref = useRef();
+// 	// Store current value in ref
+// 	useEffect(() => {
+// 		ref.current = value;
+// 	}, [value]); // Only re-run if value changes
+// 	// Return previous value (happens before update in useEffect above)
+// 	return ref.current;
+// }
 
 const App = () => {
 	const [catsData, setCatsData] = useState([]);
-	const prevCatsData = usePrevious(catsData);
+	// const prevCatsData = usePrevious(catsData);
 	const [showFav, setShowFav] = useState(false);
+
+	const cardRef = useRef();
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -49,60 +51,66 @@ const App = () => {
 		fetchData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	const handleFavorite = (e) => {
+		e.preventDefault();
+		console.log(cardRef.current);
+		//TODO: write the code to returnt the key of the card pressed
+
+		/******************************************************************************/
+		//@known_as_bmf's solution: https://stackblitz.com/edit/react-hooks-demo-xeyy4e
+		/******************************************************************************/
+		// setCatsData((prevState) =>
+		// 	prevState.map((c) => (c.id === currentCat.id ? { ...c, favorite: !c.favorite } : c))
+		// );
+	};
+
 	const favoriteCatsData = catsData.filter((d) => d.favorite);
 	return (
 		<React.Fragment>
 			<h1>Bento Cats Project</h1>
-			<Button
+			{/* <Button
 				disabled={favoriteCatsData.length === 0}
 				variant='contained'
 				color={showFav ? 'secondary' : 'inherit'}
 				onClick={() => {
 					showFav ? setCatsData(prevCatsData) : setCatsData(favoriteCatsData);
 					setShowFav(!showFav);
-				}}>{`Show ${showFav ? 'All' : 'Fav'}`}</Button>
+				}}>{`Show ${showFav ? 'All' : 'Fav'}`}</Button> */}
 
 			<Grid container className='container'>
 				{catsData &&
-					catsData.map((card, i) => {
-						return (
-							<Grid className='item' item xs={12} sm={6} md={4} lg={3} key={card.id}>
-								<Card className='card'>
-									<CardContent className='card-content'>
-										<CardMedia
-											style={{ height: 450, width: '100%' }}
-											image={card.image}
-											title={card.id}
-										/>
-										<div className='content'>
-											<Typography variant='body2' component='p'>
-												{card.fact}
-											</Typography>
-											<br />
-											<div className='icon'>
-												<IconButton
-													onClick={() =>
-														/******************************************************************************/
-														//@known_as_bmf's solution: https://stackblitz.com/edit/react-hooks-demo-xeyy4e
-														/******************************************************************************/
-														setCatsData((prevState) =>
-															prevState.map((c) =>
-																c.id === card.id ? { ...c, favorite: !c.favorite } : c
-															)
-														)
-													}
-													aria-label='add to favorites'>
-													<FavoriteIcon
-														color={catsData && card.favorite ? 'secondary' : 'inherit'}
-													/>
-												</IconButton>
+					catsData
+						.filter((cat) => !showFav || cat.favorite)
+						.map((card, i) => {
+							return (
+								<Grid className='item' item xs={12} sm={6} md={4} lg={3} key={card.id} ref={cardRef}>
+									<Card className='card'>
+										<CardContent className='card-content'>
+											<CardMedia
+												style={{ height: 450, width: '100%' }}
+												image={card.image}
+												title={card.id}
+											/>
+											<div className='content'>
+												<Typography variant='body2' component='p'>
+													{card.fact}
+												</Typography>
+												<p>{card.id}</p>
+												<br />
+												<div className='icon'>
+													<IconButton onClick={handleFavorite} aria-label='add to favorites'>
+														<FavoriteIcon
+															color={catsData && card.favorite ? 'secondary' : 'inherit'}
+														/>
+													</IconButton>
+												</div>
 											</div>
-										</div>
-									</CardContent>
-								</Card>
-							</Grid>
-						);
-					})}
+										</CardContent>
+									</Card>
+								</Grid>
+							);
+						})}
 			</Grid>
 		</React.Fragment>
 	);
